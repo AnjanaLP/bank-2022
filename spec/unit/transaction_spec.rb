@@ -30,4 +30,11 @@ describe Transaction do
       expect(transaction.debit).to eq transaction
     end
   end
+
+  describe '#date' do
+    it 'returns the date it was created on' do
+      allow(Time).to receive(:now).and_return(Time.parse("10/01/2022"))
+      expect(transaction.date).to eq "10/01/2022"
+    end
+  end
 end
