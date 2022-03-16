@@ -1,20 +1,21 @@
 require 'account'
 
 describe Account do
-  subject(:account)       { described_class.new(balance: 0, transaction_log: transaction_log) }
+  subject(:account)       { described_class.new(transaction_log: transaction_log) }
   let(:transaction_log)   { double :transaction_log }
+  let(:amount)            { 100 }
 
   describe '#balance' do
     context 'when no value given on initialize' do
-      it 'initially returns zero' do
-        expect(account.balance).to eq 0
+      it 'has the default opening balance' do
+        expect(account.balance).to eq described_class::DEFAULT_BALANCE
       end
     end
 
     context 'when a value given on initialize' do
-      subject(:account)   { described_class.new(balance: 100) }
-      it 'initially returns the given value' do
-        expect(account.balance).to eq 100
+      subject(:account)   { described_class.new(balance: amount) }
+      it 'has the specified opening balance' do
+        expect(account.balance).to eq amount
       end
     end
   end
@@ -22,12 +23,24 @@ describe Account do
   describe '#deposit' do
     it 'adds the given amount to the balance' do
       allow(transaction_log).to receive(:create_credit_transaction)
-      expect { account.deposit(100) }.to change { account.balance }.by(100)
+      expect { account.deposit(amount) }.to change { account.balance }.by(amount)
     end
 
-    it 'asks the transaction_log to create a credit transaction' do
-      expect(transaction_log).to receive(:create_credit_transaction).with(100)
-      account.deposit(100)
+    it 'asks the transaction_log to create a credit transaction and passes it the amount' do
+      expect(transaction_log).to receive(:create_credit_transaction).with(amount)
+      account.deposit(amount)
+    end
+  end
+
+  describe '#withdraw' do
+    it 'subtracts the given amount from the balance' do
+      allow(transaction_log).to receive(:create_debit_transaction)
+      expect { account.withdraw(amount) }.to change { account.balance }.by(-amount)
+    end
+
+    it 'asks the transaction_log to create a debit transaction and passes it the amount' do
+      expect(transaction_log).to receive(:create_debit_transaction).with(amount)
+      account.withdraw(amount)
     end
   end
 end

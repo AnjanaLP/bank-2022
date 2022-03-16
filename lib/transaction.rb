@@ -1,6 +1,6 @@
 class Transaction
 
-  attr_reader :type
+  attr_reader :type, :amount
 
   def initialize(amount)
     @amount = amount
@@ -8,6 +8,11 @@ class Transaction
 
   def credit
     @type = :credit
+    self
+  end
+
+  def debit
+    @type = :debit
     self
   end
 end

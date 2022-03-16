@@ -12,6 +12,11 @@ class TransactionLog
     add(transaction.credit)
   end
 
+  def create_debit_transaction(amount)
+    create_transaction(amount)
+    add(transaction.debit)
+  end
+
   def transactions
     @transactions.dup
   end
