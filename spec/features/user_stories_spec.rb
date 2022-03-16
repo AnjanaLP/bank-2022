@@ -14,9 +14,9 @@ describe 'User stories' do
     expect { account.deposit(100) }.to change { account.balance }.by(100)
   end
 
-   it 'a deposit is stored in the transaction log' do
-     transaction_log = account.transaction_log
-     account.deposit(100)
-     expect(transaction_log.transactions).not_to be_empty
-   end
+  it 'a deposit is stored in the transaction log' do
+    transaction_log = account.transaction_log
+    account.deposit(100)
+    expect(transaction_log.transactions).not_to be_empty
+  end
 end

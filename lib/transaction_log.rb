@@ -2,8 +2,6 @@ require_relative 'transaction'
 
 class TransactionLog
 
-  attr_reader :transactions
-
   def initialize(transaction_class: Transaction)
     @transaction_class = transaction_class
     @transactions = []
@@ -12,6 +10,10 @@ class TransactionLog
   def create_credit_transaction(amount)
     create_transaction(amount)
     add(transaction.credit)
+  end
+
+  def transactions
+    @transactions.dup
   end
 
   private
@@ -23,6 +25,6 @@ class TransactionLog
   end
 
   def add(transaction)
-    transactions << transaction
+    @transactions << transaction
   end
 end
