@@ -7,12 +7,12 @@ class TransactionLog
     @transactions = []
   end
 
-  def create_credit_transaction(amount)
+  def credit_transaction(amount)
     create_transaction(amount)
     add(transaction.credit)
   end
 
-  def create_debit_transaction(amount)
+  def debit_transaction(amount)
     create_transaction(amount)
     add(transaction.debit)
   end
