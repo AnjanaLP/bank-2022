@@ -11,13 +11,13 @@ class Account
   end
 
   def deposit(amount)
-    transaction_log.create_credit_transaction(amount)
     @balance += amount
+    transaction_log.create_credit_transaction(amount: amount, balance: balance)
   end
 
   def withdraw(amount)
-    transaction_log.create_debit_transaction(amount)
     @balance -= amount
+    transaction_log.create_debit_transaction(amount: amount, balance: balance)
   end
 
   private

@@ -3,7 +3,7 @@ require 'account'
 describe Account do
   subject(:account)       { described_class.new(transaction_log: transaction_log) }
   let(:transaction_log)   { double :transaction_log }
-  let(:amount)            { 100 }
+  let(:amount)            { 10 }
 
   describe '#balance' do
     context 'when no value given on initialize' do
@@ -26,8 +26,8 @@ describe Account do
       expect { account.deposit(amount) }.to change { account.balance }.by(amount)
     end
 
-    it 'asks the transaction_log to create a credit transaction and passes it the amount' do
-      expect(transaction_log).to receive(:create_credit_transaction).with(amount)
+    it 'asks the transaction_log to create a credit transaction and passes it the amount and current balance' do
+      expect(transaction_log).to receive(:create_credit_transaction).with(amount: amount, balance: amount)
       account.deposit(amount)
     end
   end
@@ -38,8 +38,8 @@ describe Account do
       expect { account.withdraw(amount) }.to change { account.balance }.by(-amount)
     end
 
-    it 'asks the transaction_log to create a debit transaction and passes it the amount' do
-      expect(transaction_log).to receive(:create_debit_transaction).with(amount)
+    it 'asks the transaction_log to create a debit transaction and passes it the amount and current balance' do
+      expect(transaction_log).to receive(:create_debit_transaction).with(amount: amount, balance: -amount)
       account.withdraw(amount)
     end
   end
