@@ -7,13 +7,13 @@ class TransactionLog
     @transactions = []
   end
 
-  def create_credit_transaction(amount:, balance:)
-    create_transaction(amount: amount, balance: balance)
+  def create_credit_transaction(amount)
+    create_transaction(amount)
     add(transaction.credit)
   end
 
-  def create_debit_transaction(amount:, balance:)
-    create_transaction(amount: amount, balance: balance)
+  def create_debit_transaction(amount)
+    create_transaction(amount)
     add(transaction.debit)
   end
 
@@ -25,8 +25,8 @@ class TransactionLog
 
   attr_reader :transaction, :transaction_class
 
-  def create_transaction(amount:, balance:)
-    @transaction = transaction_class.new(amount: amount, balance: balance)
+  def create_transaction(amount)
+    @transaction = transaction_class.new(amount)
   end
 
   def add(transaction)

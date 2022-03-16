@@ -4,23 +4,6 @@ describe 'User stories' do
   let(:printer)           { Printer.new(transaction_log: transaction_log) }
   let(:amount)            { 100 }
 
-  it 'an account has a default opening balance' do
-    expect(account.balance).to eq Account::DEFAULT_BALANCE
-  end
-
-  it 'an account can have a specified opening balance' do
-    account = Account.new(balance: amount)
-    expect(account.balance).to eq amount
-  end
-
-  it 'a deposit increases the balance by the deposit amount' do
-    expect { account.deposit(amount) }.to change { account.balance }.by(amount)
-  end
-
-  it 'a withdrawal decreases the balance by the withdrawal amount' do
-    expect { account.withdraw(amount) }.to change { account.balance }.by(-amount)
-  end
-
   it 'the transaction log initially has an empty transactions collection' do
     expect(transaction_log.transactions).to be_empty
   end

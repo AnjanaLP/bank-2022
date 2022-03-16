@@ -1,17 +1,11 @@
 require 'transaction'
 
 describe Transaction do
-  subject(:transaction)   { described_class.new(amount: 10, balance: 100) }
+  subject(:transaction)   { described_class.new(10) }
 
   describe '#amount' do
     it 'returns the amount of the transaction' do
       expect(transaction.amount).to eq 10
-    end
-  end
-
-  describe '#balance' do
-    it 'returns the balance after the transaction' do
-      expect(transaction.balance).to eq 100
     end
   end
 
