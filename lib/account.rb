@@ -1,6 +1,7 @@
 require_relative 'transaction_log'
 
 class Account
+  attr_reader :transaction_log
 
   def initialize(transaction_log: TransactionLog.new)
     @transaction_log = transaction_log
@@ -13,8 +14,4 @@ class Account
   def withdraw(amount)
     transaction_log.debit_transaction(amount)
   end
-
-  private
-
-  attr_reader :transaction_log
 end

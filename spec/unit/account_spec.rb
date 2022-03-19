@@ -5,6 +5,12 @@ describe Account do
   let(:transaction_log)   { double :transaction_log }
   let(:amount)            { 10 }
 
+  describe '#transaction_log' do
+    it 'returns the transaction log for the account' do
+      expect(account.transaction_log).to eq transaction_log
+    end
+  end
+
   describe '#deposit' do
     it 'asks the transaction_log to create a credit transaction and passes it the amount' do
       expect(transaction_log).to receive(:credit_transaction).with(amount)
