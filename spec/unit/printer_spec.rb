@@ -1,8 +1,8 @@
 require 'printer'
 
 describe Printer do
-  subject(:printer)     { described_class.new(transaction_log: transaction_log) }
-  let(:transaction_log) { double :transaction_log, transactions: transactions }
+  subject(:printer)     { described_class.new(account) }
+  let(:account)         { double :account, transactions: transactions }
   let(:transactions)    { [transaction_1, transaction_2, transaction_3] }
   let(:transaction_1)   { double :transaction, amount: 1000.00, type: :credit, date: "10/01/2023" }
   let(:transaction_2)   { double :transaction, amount: 2000.00, type: :credit, date: "13/01/2023" }

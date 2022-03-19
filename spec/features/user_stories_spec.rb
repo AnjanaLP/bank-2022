@@ -1,21 +1,20 @@
 describe 'User stories' do
-  let(:account)           { Account.new(transaction_log: transaction_log) }
-  let(:transaction_log)   { TransactionLog.new }
-  let(:printer)           { Printer.new(transaction_log: transaction_log) }
+  let(:account)           { Account.new }
+  let(:printer)           { Printer.new(account) }
   let(:amount)            { 100 }
 
-  it 'the transaction log initially has an empty transactions collection' do
-    expect(transaction_log.transactions).to be_empty
+  it 'the account initially has an empty transactions collection' do
+    expect(account.transactions).to be_empty
   end
 
-  it 'the transaction log stores a deposit in its transactions collection' do
+  it 'the account stores a deposit in its transactions collection' do
     account.deposit(amount)
-    expect(transaction_log.transactions).not_to be_empty
+    expect(account.transactions).not_to be_empty
   end
 
-  it 'the transaction log stores a withdrawal in its transactions collection' do
+  it 'the account stores a withdrawal in its transactions collection' do
     account.withdraw(amount)
-    expect(transaction_log.transactions).not_to be_empty
+    expect(account.transactions).not_to be_empty
   end
 
   it 'a statement can be printed' do

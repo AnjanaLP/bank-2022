@@ -1,8 +1,8 @@
 class Printer
   HEADER = "date || credit || debit || balance\n"
 
-  def initialize(transaction_log:)
-    @transaction_log = transaction_log
+  def initialize(account)
+    @account = account
   end
 
   def print_statement
@@ -15,11 +15,11 @@ class Printer
 
   private
 
-  attr_reader :transaction_log
+  attr_reader :account
 
   def statement
     balance = 0
-    transaction_log.transactions.map do |transaction|
+    account.transactions.map do |transaction|
       statement = ""
       statement << "#{transaction.date} || "
       if transaction.type == :credit

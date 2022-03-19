@@ -1,17 +1,35 @@
-require_relative 'transaction_log'
+require_relative 'transaction'
 
 class Account
-  attr_reader :transaction_log
 
-  def initialize(transaction_log: TransactionLog.new)
-    @transaction_log = transaction_log
+  def initialize(transaction_class: Transaction)
+    @transaction_class = transaction_class
+    @transactions = []
   end
 
   def deposit(amount)
-    transaction_log.credit_transaction(amount)
+    store(new_transaction(amount))
+    transaction.credit
   end
 
   def withdraw(amount)
-    transaction_log.debit_transaction(amount)
+    store(new_transaction(amount))
+    transaction.debit
+  end
+
+  def transactions
+    @transactions.dup
+  end
+
+  private
+
+  attr_reader :transaction, :transaction_class
+
+  def new_transaction(amount)
+    @transaction = transaction_class.new(amount)
+  end
+
+  def store(transaction)
+    @transactions << transaction
   end
 end

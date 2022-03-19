@@ -9,12 +9,10 @@ class Transaction
 
   def credit
     @type = :credit
-    self
   end
 
   def debit
     @type = :debit
-    self
   end
 
   private
