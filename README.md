@@ -7,7 +7,7 @@ Unit tests include test doubles and method stubs to effectively isolate the sing
 being tested and feature tests check correct integration behaviour between the
 classes. Test coverage is 100%.
 
-The Single Responsibility Principle has been adhered to in all classes and methods. The Account class receives the deposits and withdrawals and passes the information to the TransactionLog class which is responsible for recording the transaction history. The Transaction class is responsible for all the information relating to a single transaction - I have used a method call to set the transaction's credit or debit state instead of it being passed as a parameter in order to limit the number of parameters passed to transaction and allow better encapsulation of the debt/credit state. The Printer class is responsible for formatting an account's transaction log into the specified output style. Dependencies have been injected with defaults provided where appropriate.
+The Single Responsibility Principle has been adhered to in all classes and methods. The Account class is responsible for recording the transaction history. The Transaction class is responsible for all the information relating to a single transaction - I have used a method call to set the transaction's credit or debit state instead of it being passed as a parameter in order to limit the number of parameters passed to transaction and allow better encapsulation of the debt/credit state. The Printer class is responsible for formatting an account's transaction history into the specified output style. Dependencies have been injected with defaults provided where appropriate.
 
 ## Specification
 
@@ -54,31 +54,29 @@ $ rspec
 $ irb
 3.1.0 :001 > require './lib/account'
  => true
+
 3.1.0 :002 > require './lib/printer'
  => true
 
 3.1.0 :003 > account = Account.new
- => #<Account:0x000000010810d980...
+ => #<Account:0x0000000104c908d8 @transaction_class=Transaction, @transact...
 
-3.1.0 :004 > account.deposit(1000)  
- => [#<Transaction:0x000000010108f1e0 @amount=1000, @date="19/03/2022", @type=:credit>]
+3.1.0 :004 > account.deposit(1000)
+ => :credit
 
 3.1.0 :005 > account.deposit(2000)
- => [#<Transaction:0x000000010108f1e0 @amount=1000, @date="19/03/2022", @type=:credit>,
-     #<Transaction:0x0000000101066498 @amount=2000, @date="19/03/2022", @type=:credit>]
+ => :credit
 
 3.1.0 :006 > account.withdraw(500)
- => [#<Transaction:0x000000010108f1e0 @amount=1000, @date="19/03/2022", @type=:credit>,
-     #<Transaction:0x0000000101066498 @amount=2000, @date="19/03/2022", @type=:credit>,
-     #<Transaction:0x0000000100f2dab @amount=500, @date="19/03/2022",@type=:debit>]  
+ => :debit
 
-3.1.0 :007 > printer = Printer.new(transaction_log: account.transaction_log)
- => #<Printer:0x000000010812d2d0...
+3.1.0 :007 > printer = Printer.new(account)
+ => #<Printer:0x00000001086bcc50...  
 
 3.1.0 :008 > puts printer.print_statement
 date || credit || debit || balance
-19/03/2022 || || 500.00 || 2500.00                                              
-19/03/2022 || 2000.00 || || 3000.00                                             
-19/03/2022 || 1000.00 || || 1000.00                                             
- => nil    
+19/03/2022 || || 500.00 || 2500.00                             
+19/03/2022 || 2000.00 || || 3000.00                            
+19/03/2022 || 1000.00 || || 1000.00                            
+ => nil            
 ```
