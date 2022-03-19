@@ -7,15 +7,7 @@ Unit tests include test doubles and method stubs to effectively isolate the sing
 being tested and feature tests check correct integration behaviour between the
 classes. Test coverage is 100%.
 
-The Single Responsibility Principle has been adhered to in all classes and methods.
-The Account class receives the deposits and withdrawals and passes the information
-to the TransactionLog class which is responsible for recording the transaction history.
-The Transaction class is responsible for the all the information relating to a single
-transaction - I have used a method call to set the transaction's credit or debit state
-instead of it being passed as a parameter in order to limit the number of parameters passed
-to transaction and allow better encapsulation of the debt/credit state.
-The Printer class is responsible for formatting the data to the specified output style.
-Dependencies have been injected with defaults provided where appropriate.
+The Single Responsibility Principle has been adhered to in all classes and methods. The Account class receives the deposits and withdrawals and passes the information to the TransactionLog class which is responsible for recording the transaction history. The Transaction class is responsible for all the information relating to a single transaction - I have used a method call to set the transaction's credit or debit state instead of it being passed as a parameter in order to limit the number of parameters passed to transaction and allow better encapsulation of the debt/credit state. The Printer class is responsible for formatting an account's transaction log into the specified output style. Dependencies have been injected with defaults provided where appropriate.
 
 ## Specification
 
