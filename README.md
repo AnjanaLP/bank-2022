@@ -7,7 +7,7 @@ Unit tests include test doubles and method stubs to effectively isolate the sing
 being tested and feature tests check correct integration behaviour between the
 classes. Test coverage is 100%.
 
-The Single Responsibility Principle has been adhered to in all classes and methods. The Account class is responsible for recording the transaction history. The Transaction class is responsible for all the information relating to a single transaction - I have used a method call to set the transaction's credit or debit state instead of it being passed as a parameter in order to limit the number of parameters passed to transaction and allow better encapsulation of the debt/credit state. The Printer class is responsible for formatting an account's transaction history into the specified output style. Dependencies have been injected with defaults provided where appropriate.
+The Single Responsibility Principle has been adhered to in all classes and methods. The Account class is responsible for recording the transaction history - I have made sure not to expose the internal array to external modification by returning a copy of the object instead of the actual object itself. The Transaction class is responsible for all the information relating to a single transaction - I have used a method call to set the transaction's credit or debit state instead of it being passed as a parameter in order to limit the number of parameters passed to transaction and allow better encapsulation of the debt/credit state. The Printer class is responsible for formatting an account's transaction history into the specified output style. Dependencies have been injected with defaults provided where appropriate.
 
 ## Specification
 
