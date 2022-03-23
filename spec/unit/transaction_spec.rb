@@ -14,12 +14,20 @@ describe Transaction do
       transaction.credit
       expect(transaction.type).to eq :credit
     end
+
+    it 'returns itself' do
+      expect(transaction.credit).to eq transaction
+    end
   end
 
   describe '#debit' do
     it 'sets the transaction type to debit' do
       transaction.debit
       expect(transaction.type).to eq :debit
+    end
+
+    it 'returns itself' do
+      expect(transaction.credit).to eq transaction
     end
   end
 
