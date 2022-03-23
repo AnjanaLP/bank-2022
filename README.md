@@ -50,33 +50,25 @@ $ rspec
 - SimpleCov
 
 ## Code example
-```
-$ irb
+```ruby
 3.1.0 :001 > require './lib/account'
  => true
-
 3.1.0 :002 > require './lib/printer'
  => true
-
 3.1.0 :003 > account = Account.new
- => #<Account:0x0000000104c908d8 @transaction_class=Transaction, @transact...
-
+ => #<Account:0x0000000101352328 @transaction_class=Transaction, @transactions=[]>
 3.1.0 :004 > account.deposit(1000)
- => :credit
-
+ => #<Transaction:0x0000000101422348 @amount=1000, @date="23/03/2022", @type=:credit>
 3.1.0 :005 > account.deposit(2000)
- => :credit
-
+ => #<Transaction:0x00000001013d86f8 @amount=2000, @date="23/03/2022", @type=:credit>
 3.1.0 :006 > account.withdraw(500)
- => :debit
-
+ => #<Transaction:0x00000001012f2518 @amount=500, @date="23/03/2022", @type=:debit>
 3.1.0 :007 > printer = Printer.new(account)
- => #<Printer:0x00000001086bcc50...  
-
+ => #<Printer:0x00000001013899b8... 
 3.1.0 :008 > puts printer.print_statement
 date || credit || debit || balance
-19/03/2022 || || 500.00 || 2500.00                             
-19/03/2022 || 2000.00 || || 3000.00                            
-19/03/2022 || 1000.00 || || 1000.00                            
- => nil            
+23/03/2022 || || 500.00 || 2500.00
+23/03/2022 || 2000.00 || || 3000.00
+23/03/2022 || 1000.00 || || 1000.00
+ => nil
 ```
