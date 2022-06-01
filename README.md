@@ -1,4 +1,4 @@
-# Bank Tech Test
+# Bank 
 
 A challenge to implement the specification given below in order to test OO design
 and TDD skills.
@@ -64,7 +64,7 @@ $ rspec
 3.1.0 :006 > account.withdraw(500)
  => #<Transaction:0x00000001012f2518 @amount=500, @date="23/03/2022", @type=:debit>
 3.1.0 :007 > printer = Printer.new(account)
- => #<Printer:0x00000001013899b8... 
+ => #<Printer:0x00000001013899b8...
 3.1.0 :008 > puts printer.print_statement
 date || credit || debit || balance
 23/03/2022 || || 500.00 || 2500.00
